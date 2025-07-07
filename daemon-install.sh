@@ -29,9 +29,11 @@ WantedBy=multi-user.target"
         err "/usr/bin/filelink (by wget download)";
     fi
 
-    ${COMMAND} rm "${SCRIPT_DIR}"/config/config.yaml
-    if ! ${COMMAND} wget -O "${SCRIPT_DIR}"/config/config.yaml https://raw.githubusercontent.com/medowic/filelink-daemon/master/config/config.yaml > /dev/null 2>&1; then
-        err "${SCRIPT_DIR}/config/config.yaml (by wget download)";
+    if ! [ -f "${SCRIPT_DIR}"/config/daemon.source ]; then
+        ${COMMAND} rm "${SCRIPT_DIR}"/config/config.yaml
+        if ! ${COMMAND} wget -O "${SCRIPT_DIR}"/config/config.yaml https://raw.githubusercontent.com/medowic/filelink-daemon/master/config/config.yaml > /dev/null 2>&1; then
+            err "${SCRIPT_DIR}/config/config.yaml (by wget download)";
+        fi
     fi
 
     if ! ${COMMAND} wget -O "${SCRIPT_DIR}"/version/version_daemon.data https://raw.githubusercontent.com/medowic/filelink-daemon/master/version/version.data > /dev/null 2>&1; then
