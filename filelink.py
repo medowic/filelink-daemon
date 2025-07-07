@@ -28,10 +28,10 @@ def help(code=0):
 def version():
     with open(f"{workdir}/version/version.data", "r", encoding="utf-8") as file:
         version_main_local = file.read()
-        version_main_local.strip()
+        version_main_local = version_main_local.strip()
     with open(f"{workdir}/version/version_daemon.data", "r", encoding="utf-8") as file:
         version_daemon_local = file.read()
-        version_daemon_local.strip()
+        version_daemon_local = version_daemon_local.strip()
 
     print("\nFilelink Server (Daemon)")
     print("repository: https://github.com/medowic/filelink\n")
@@ -51,10 +51,10 @@ def update():
 
     with open(f"{workdir}/version/version.data", "r", encoding="utf-8") as file:
         version_main_local = file.read()
-        version_main_local.strip()
+        version_main_local = version_main_local.strip()
     with open(f"{workdir}/version/version_daemon.data", "r", encoding="utf-8") as file:
         version_daemon_local = file.read()
-        version_daemon_local.strip()
+        version_daemon_local = version_daemon_local.strip()
 
     if not version_main_local == version_main:
         print(f"New version of Filelink available ({version_main}) [current: {version_main_local}]")
