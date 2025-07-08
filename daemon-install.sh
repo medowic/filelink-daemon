@@ -63,6 +63,9 @@ WantedBy=multi-user.target"
 
     ${COMMAND} chmod +x /usr/bin/filelink
     ${COMMAND} chmod 755 /usr/bin/filelink
+    
+    ${COMMAND} chmod +x /usr/bin/filelink-uninstall
+    ${COMMAND} chmod 755 /usr/bin/filelink-uninstall
 
     ${COMMAND} systemctl daemon-reload > /dev/null
     ${COMMAND} systemctl stop filelink > /dev/null
