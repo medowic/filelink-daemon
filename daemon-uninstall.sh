@@ -13,21 +13,28 @@ function uninstall() {
 
     if [ -d /etc/filelink ]; then
         if ! rm -rf /etc/filelink; then
-            err "filelink (folder)" "/etc/";
+            err "filelink (directory)" "/etc/";
         fi
     fi
 
-    if [ -f "${FILELINK_DIR}"/config/config.yaml ]; then
-        if ! rm "${FILELINK_DIR}"/config/config.yaml; then
-            err "config.yaml" "${SCRIPT_DIR}/config/"
+    if [ -d "${FILELINK_DIR}"/config ]; then
+        if ! rm -rf "${FILELINK_DIR}"/config; then
+            err "config (directory)" "${SCRIPT_DIR}/"
         fi
     fi
 
+    mkdir "${SCRIPT_DIR}"/config
     if ! wget -O "${FILELINK_DIR}"/config/config.yaml https://raw.githubusercontent.com/medowic/filelink/master/config/config.yaml > /dev/null 2>&1; then
         echo "Error: couldn't download original Filelink config.yaml from Github";
         echo "Check that 'wget' is installed on your machine and try again";
         echo "failed with exit-code 3";
         exit 3;
+    fi
+
+    if [ -f "${SCRIPT_DIR}"/version/version_daemon.data ]; then
+        if ! rm "${SCRIPT_DIR}"/version/version_daemon.data; then
+            err "version_daemon.data" "${SCRIPT_DIR}/version"
+        fi
     fi
 
     if [ -f /usr/bin/filelink ]; then
