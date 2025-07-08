@@ -46,8 +46,10 @@ def update():
     print("Checking for updates...\n")
     with urllib.request.urlopen('https://raw.githubusercontent.com/medowic/filelink-daemon/master/version/version.data') as response:
         version_daemon = response.read().decode('utf-8')
+        version_daemon = version_daemon.strip()
     with urllib.request.urlopen('https://raw.githubusercontent.com/medowic/filelink/master/version/version.data') as response:
         version_main = response.read().decode('utf-8')
+        version_main = version_main.strip()
 
     with open(f"{workdir}/version/version.data", "r", encoding="utf-8") as file:
         version_main_local = file.read()
