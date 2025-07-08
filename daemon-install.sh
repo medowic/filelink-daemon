@@ -30,7 +30,11 @@ WantedBy=multi-user.target"
     fi
 
     if ! [ -f "${SCRIPT_DIR}"/config/daemon.source ]; then
-        ${COMMAND} rm "${SCRIPT_DIR}"/config/config.yaml
+        if [ -f "${SCRIPT_DIR}"/config/config.yaml ]; then
+            ${COMMAND} rm "${SCRIPT_DIR}"/config/config.yaml
+        else
+            ${COMMAND} mkdir "${SCRIPT_DIR}"/config
+        fi
         if ! ${COMMAND} wget -O "${SCRIPT_DIR}"/config/config.yaml https://raw.githubusercontent.com/medowic/filelink-daemon/master/config/config.yaml > /dev/null 2>&1; then
             err "${SCRIPT_DIR}/config/config.yaml (by wget download)";
         fi

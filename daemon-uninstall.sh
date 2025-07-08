@@ -19,11 +19,11 @@ function uninstall() {
 
     if [ -d "${FILELINK_DIR}"/config ]; then
         if ! rm -rf "${FILELINK_DIR}"/config; then
-            err "config (directory)" "${SCRIPT_DIR}/"
+            err "config (directory)" "${FILELINK_DIR}/";
         fi
     fi
 
-    mkdir "${SCRIPT_DIR}"/config
+    mkdir "${FILELINK_DIR}"/config
     if ! wget -O "${FILELINK_DIR}"/config/config.yaml https://raw.githubusercontent.com/medowic/filelink/master/config/config.yaml > /dev/null 2>&1; then
         echo "Error: couldn't download original Filelink config.yaml from Github";
         echo "Check that 'wget' is installed on your machine and try again";
@@ -31,9 +31,9 @@ function uninstall() {
         exit 3;
     fi
 
-    if [ -f "${SCRIPT_DIR}"/version/version_daemon.data ]; then
-        if ! rm "${SCRIPT_DIR}"/version/version_daemon.data; then
-            err "version_daemon.data" "${SCRIPT_DIR}/version"
+    if [ -f "${FILELINK_DIR}"/version/version_daemon.data ]; then
+        if ! rm "${FILELINK_DIR}"/version/version_daemon.data; then
+            err "version_daemon.data" "${FILELINK_DIR}/version";
         fi
     fi
 
