@@ -18,7 +18,7 @@ After=network.target
 [Service]
 EnvironmentFile=${SCRIPT_DIR}/config/daemon.source 
 User=$(whoami)
-ExecStart=/usr/bin/python3 ${SCRIPT_DIR}/run.py \$FILELINK_PATH
+ExecStart=/usr/bin/python3 ${SCRIPT_DIR}/run.py -o -f \$FILELINK_PATH
 WorkingDirectory=${SCRIPT_DIR}
 SuccessExitStatus=0
 
